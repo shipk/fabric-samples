@@ -22,14 +22,14 @@ Profiles:
         Consortiums:
             SampleConsortium:
                 Organizations:
-                    - *Org1
+                    - *sgorg
                     - *Org2
     TwoOrgsChannel:
         Consortium: SampleConsortium
         Application:
             <<: *ApplicationDefaults
             Organizations:
-                - *Org1
+                - *sgorg
                 - *Org2
 
 ################################################################################
@@ -55,21 +55,21 @@ Organizations:
         # MSPDir is the filesystem path which contains the MSP configuration
         MSPDir: crypto-config/ordererOrganizations/sg.com/msp
 
-    - &Org1
+    - &sgorg
         # DefaultOrg defines the organization which is used in the sampleconfig
         # of the fabric.git development environment
-        Name: Org1MSP
+        Name: SGOrgMSP
 
         # ID to load the MSP definition as
-        ID: Org1MSP
+        ID: SGOrgMSP
 
-        MSPDir: crypto-config/peerOrganizations/org1.sg.com/msp
+        MSPDir: crypto-config/peerOrganizations/sgorg.sg.com/msp
 
         AnchorPeers:
             # AnchorPeers defines the location of peers which can be used
             # for cross org gossip communication.  Note, this value is only
             # encoded in the genesis block in the Application section context
-            - Host: peer0.org1.sg.com
+            - Host: peer0.sgorg.sg.com
               Port: 7051
 
     - &Org2
@@ -107,7 +107,7 @@ Orderer: &OrdererDefaults
         - orderer.sg.com:7050
 
     # Batch Timeout: The amount of time to wait before creating a batch
-    BatchTimeout: 2s
+    BatchTimeout: 5s
 
     # Batch Size: Controls the number of messages batched into a block
     BatchSize:

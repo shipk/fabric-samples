@@ -159,7 +159,7 @@ function replacePrivateKey () {
   # The next steps will replace the template's contents with the
   # actual values of the private key file names for the two CAs.
   CURRENT_DIR=$PWD
-  cd crypto-config/peerOrganizations/org1.sg.com/ca/
+  cd crypto-config/peerOrganizations/sgorg.sg.com/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
   sed $OPTS "s/CA1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
@@ -223,7 +223,7 @@ function generateCerts (){
 #
 # Configtxgen consumes a file - ``configtx.yaml`` - that contains the definitions
 # for the sample network. There are three members - one Orderer Org (``OrdererOrg``)
-# and two Peer Orgs (``Org1`` & ``Org2``) each managing and maintaining two peer nodes.
+# and two Peer Orgs (``SGOrg`` & ``Org2``) each managing and maintaining two peer nodes.
 # This file also specifies a consortium - ``SampleConsortium`` - consisting of our
 # two Peer Orgs.  Pay specific attention to the "Profiles" section at the top of
 # this file.  You will notice that we have two unique headers. One for the orderer genesis
@@ -231,7 +231,7 @@ function generateCerts (){
 # These headers are important, as we will pass them in as arguments when we create
 # our artifacts.  This file also contains two additional specifications that are worth
 # noting.  Firstly, we specify the anchor peers for each Peer Org
-# (``peer0.org1.sg.com`` & ``peer0.org2.sg.com``).  Secondly, we point to
+# (``peer0.sgorg.sg.com`` & ``peer0.org2.sg.com``).  Secondly, we point to
 # the location of the MSP directory for each member, in turn allowing us to store the
 # root certificates for each Org in the orderer genesis block.  This is a critical
 # concept. Now any network entity communicating with the ordering service can have
@@ -279,11 +279,11 @@ function generateChannelArtifacts() {
 
   echo
   echo "#################################################################"
-  echo "#######    Generating anchor peer update for Org1MSP   ##########"
+  echo "#######    Generating anchor peer update for SGOrgMSP   ##########"
   echo "#################################################################"
-  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/Org1MSPanchors.tx -channelID $CHANNEL_NAME -asOrg Org1MSP
+  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/SGOrgMSPanchors.tx -channelID $CHANNEL_NAME -asOrg SGOrgMSP
   if [ "$?" -ne 0 ]; then
-    echo "Failed to generate anchor peer update for Org1MSP..."
+    echo "Failed to generate anchor peer update for SGOrgMSP..."
     exit 1
   fi
 

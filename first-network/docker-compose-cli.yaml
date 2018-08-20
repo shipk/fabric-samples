@@ -18,19 +18,19 @@ services:
     networks:
       - sgn
 
-  peer0.org1.sg.com:
-    container_name: peer0.org1.sg.com
+  peer0.sgorg.sg.com:
+    container_name: peer0.sgorg.sg.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer0.org1.sg.com
+      service: peer0.sgorg.sg.com
     networks:
       - sgn
 
-  peer1.org1.sg.com:
-    container_name: peer1.org1.sg.com
+  peer1.sgorg.sg.com:
+    container_name: peer1.sgorg.sg.com
     extends:
       file:  base/docker-compose-base.yaml
-      service: peer1.org1.sg.com
+      service: peer1.sgorg.sg.com
     networks:
       - sgn
 
@@ -59,13 +59,13 @@ services:
       - CORE_VM_ENDPOINT=unix:///host/var/run/docker.sock
       - CORE_LOGGING_LEVEL=DEBUG
       - CORE_PEER_ID=cli
-      - CORE_PEER_ADDRESS=peer0.org1.sg.com:7051
-      - CORE_PEER_LOCALMSPID=Org1MSP
+      - CORE_PEER_ADDRESS=peer0.sgorg.sg.com:7051
+      - CORE_PEER_LOCALMSPID=SGOrgMSP
       - CORE_PEER_TLS_ENABLED=true
-      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.sg.com/peers/peer0.org1.sg.com/tls/server.crt
-      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.sg.com/peers/peer0.org1.sg.com/tls/server.key
-      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.sg.com/peers/peer0.org1.sg.com/tls/ca.crt
-      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/org1.sg.com/users/Admin@org1.sg.com/msp
+      - CORE_PEER_TLS_CERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/sgorg.sg.com/peers/peer0.sgorg.sg.com/tls/server.crt
+      - CORE_PEER_TLS_KEY_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/sgorg.sg.com/peers/peer0.sgorg.sg.com/tls/server.key
+      - CORE_PEER_TLS_ROOTCERT_FILE=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/sgorg.sg.com/peers/peer0.sgorg.sg.com/tls/ca.crt
+      - CORE_PEER_MSPCONFIGPATH=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/peerOrganizations/sgorg.sg.com/users/Admin@sgorg.sg.com/msp
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/peer
     command: /bin/bash -c './scripts/script.sh ${CHANNEL_NAME} ${DELAY}; sleep $TIMEOUT'
     volumes:
@@ -76,8 +76,8 @@ services:
         - ./channel-artifacts:/opt/gopath/src/github.com/hyperledger/fabric/peer/channel-artifacts
     depends_on:
       - orderer.sg.com
-      - peer0.org1.sg.com
-      - peer1.org1.sg.com
+      - peer0.sgorg.sg.com
+      - peer1.sgorg.sg.com
       - peer0.org2.sg.com
       - peer1.org2.sg.com
     networks:
