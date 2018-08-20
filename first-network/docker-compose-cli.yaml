@@ -34,22 +34,6 @@ services:
     networks:
       - sgn
 
-  peer0.org2.sg.com:
-    container_name: peer0.org2.sg.com
-    extends:
-      file:  base/docker-compose-base.yaml
-      service: peer0.org2.sg.com
-    networks:
-      - sgn
-
-  peer1.org2.sg.com:
-    container_name: peer1.org2.sg.com
-    extends:
-      file:  base/docker-compose-base.yaml
-      service: peer1.org2.sg.com
-    networks:
-      - sgn
-
   cli:
     container_name: cli
     image: hyperledger/fabric-tools
@@ -78,8 +62,6 @@ services:
       - orderer.sg.com
       - peer0.sgorg.sg.com
       - peer1.sgorg.sg.com
-      - peer0.org2.sg.com
-      - peer1.org2.sg.com
     networks:
       - sgn
 

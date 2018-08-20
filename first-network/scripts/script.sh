@@ -104,7 +104,7 @@ joinWithRetry () {
 }
 
 joinChannel () {
-	for ch in 0 1 2 3; do
+	for ch in 0 1; do
 		setGlobals $ch
 		joinWithRetry $ch
 		echo "===================== PEER$ch joined on the channel \"$CHANNEL_NAME\" ===================== "
@@ -198,18 +198,14 @@ joinChannel
 ## Set the anchor peers for each org in the channel
 echo "Updating anchor peers for sgorg..."
 updateAnchorPeers 0
-echo "Updating anchor peers for org2..."
-updateAnchorPeers 2
 
 ## Install chaincode on Peer0/SGOrg and Peer2/Org2
 echo "Installing chaincode on sgorg/peer0..."
 installChaincode 0
-echo "Install chaincode on org2/peer2..."
-installChaincode 2
 
-#Instantiate chaincode on Peer2/Org2
-echo "Instantiating chaincode on org2/peer2..."
-instantiateChaincode 2
+#Instantiate chaincode on Peer0/SGOrg
+echo "Instantiating chaincode on SGOrg/peer0..."
+instantiateChaincode 0
 
 #Query on chaincode on Peer0/SGOrg
 echo "Querying chaincode on sgorg/peer0..."
@@ -218,14 +214,6 @@ chaincodeQuery 0 100
 #Invoke on chaincode on Peer0/SGOrg
 echo "Sending invoke transaction on sgorg/peer0..."
 chaincodeInvoke 0
-
-## Install chaincode on Peer3/Org2
-echo "Installing chaincode on org2/peer3..."
-installChaincode 3
-
-#Query on chaincode on Peer3/Org2, check if the result is 90
-echo "Querying chaincode on org2/peer3..."
-chaincodeQuery 3 90
 
 echo
 echo "========= All GOOD, SGN execution completed =========== "
