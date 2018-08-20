@@ -156,6 +156,8 @@ chaincodeQuery () {
      echo "Attempting to Query PEER$PEER ...$(($(date +%s)-starttime)) secs"
      peer chaincode query -C $CHANNEL_NAME -n mycc -c '{"Args":["query","a"]}' >&log.txt
      test $? -eq 0 && VALUE=$(cat log.txt | awk '/Query Result/ {print $NF}')
+	 echo VALUE="$VALUE"
+	 cat log.txt
      test "$VALUE" = "$2" && let rc=0
   done
   echo
@@ -199,7 +201,7 @@ joinChannel
 echo "Updating anchor peers for sgorg..."
 updateAnchorPeers 0
 
-## Install chaincode on Peer0/SGOrg and Peer2/Org2
+## Install chaincode on Peer0/SGOrg
 echo "Installing chaincode on sgorg/peer0..."
 installChaincode 0
 
