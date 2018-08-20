@@ -35,14 +35,14 @@ export FABRIC_CFG_PATH=${PWD}
 # Print the usage message
 function printHelp () {
   echo "Usage: "
-  echo "  byfn.sh -m up|down|restart|generate [-c <channel name>] [-t <timeout>] [-d <delay>] [-f <docker-compose-file>] [-s <dbtype>]"
-  echo "  byfn.sh -h|--help (print this message)"
+  echo "  sgn.sh -m up|down|restart|generate [-c <channel name>] [-t <timeout>] [-d <delay>] [-f <docker-compose-file>] [-s <dbtype>]"
+  echo "  sgn.sh -h|--help (print this message)"
   echo "    -m <mode> - one of 'up', 'down', 'restart' or 'generate'"
   echo "      - 'up' - bring up the network with docker-compose up"
   echo "      - 'down' - clear the network with docker-compose down"
   echo "      - 'restart' - restart the network"
   echo "      - 'generate' - generate required certificates and genesis block"
-  echo "    -c <channel name> - channel name to use (defaults to \"mychannel\")"
+  echo "    -c <channel name> - channel name to use (defaults to \"sgchannel\")"
   echo "    -t <timeout> - CLI timeout duration in microseconds (defaults to 10000)"
   echo "    -d <delay> - delay duration in seconds (defaults to 3)"
   echo "    -f <docker-compose-file> - specify which docker-compose file use (defaults to docker-compose-cli.yaml)"
@@ -51,14 +51,14 @@ function printHelp () {
   echo "Typically, one would first generate the required certificates and "
   echo "genesis block, then bring up the network. e.g.:"
   echo
-  echo "	byfn.sh -m generate -c mychannel"
-  echo "	byfn.sh -m up -c mychannel -s couchdb"
-  echo "	byfn.sh -m down -c mychannel"
+  echo "	sgn.sh -m generate -c sgchannel"
+  echo "	sgn.sh -m up -c sgchannel -s couchdb"
+  echo "	sgn.sh -m down -c sgchannel"
   echo
   echo "Taking all defaults:"
-  echo "	byfn.sh -m generate"
-  echo "	byfn.sh -m up"
-  echo "	byfn.sh -m down"
+  echo "	sgn.sh -m generate"
+  echo "	sgn.sh -m up"
+  echo "	sgn.sh -m down"
 }
 
 # Ask user for confirmation to proceed
@@ -159,11 +159,11 @@ function replacePrivateKey () {
   # The next steps will replace the template's contents with the
   # actual values of the private key file names for the two CAs.
   CURRENT_DIR=$PWD
-  cd crypto-config/peerOrganizations/org1.example.com/ca/
+  cd crypto-config/peerOrganizations/org1.sg.com/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
   sed $OPTS "s/CA1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
-  cd crypto-config/peerOrganizations/org2.example.com/ca/
+  cd crypto-config/peerOrganizations/org2.sg.com/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
   sed $OPTS "s/CA2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
@@ -231,7 +231,7 @@ function generateCerts (){
 # These headers are important, as we will pass them in as arguments when we create
 # our artifacts.  This file also contains two additional specifications that are worth
 # noting.  Firstly, we specify the anchor peers for each Peer Org
-# (``peer0.org1.example.com`` & ``peer0.org2.example.com``).  Secondly, we point to
+# (``peer0.org1.sg.com`` & ``peer0.org2.sg.com``).  Secondly, we point to
 # the location of the MSP directory for each member, in turn allowing us to store the
 # root certificates for each Org in the orderer genesis block.  This is a critical
 # concept. Now any network entity communicating with the ordering service can have
@@ -308,8 +308,8 @@ OS_ARCH=$(echo "$(uname -s|tr '[:upper:]' '[:lower:]'|sed 's/mingw64_nt.*/window
 CLI_TIMEOUT=10000
 #default for delay
 CLI_DELAY=3
-# channel name defaults to "mychannel"
-CHANNEL_NAME="mychannel"
+# channel name defaults to "sgchannel"
+CHANNEL_NAME="sgchannel"
 # use this as the default docker-compose yaml definition
 COMPOSE_FILE=docker-compose-cli.yaml
 #
