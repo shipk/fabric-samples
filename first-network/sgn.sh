@@ -137,8 +137,8 @@ function networkDown () {
     # do not remove orderer block and other channel configuration transactions and certs
     # rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config
     
-    # remove the docker-compose yaml file that was customized to the project
-    rm -f docker-compose-e2e.yaml
+    # do not remove the docker-compose yaml file that was customized to the project
+    # rm -f docker-compose-e2e.yaml
   fi
 }
 
@@ -298,7 +298,8 @@ CLI_DELAY=3
 # channel name defaults to "sgchannel"
 CHANNEL_NAME="sgchannel"
 # use this as the default docker-compose yaml definition
-COMPOSE_FILE=docker-compose-cli.yaml
+#COMPOSE_FILE=docker-compose-cli.yaml
+COMPOSE_FILE=docker-compose-e2e.yaml
 #
 COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 
