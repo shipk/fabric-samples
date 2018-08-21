@@ -14,7 +14,7 @@
 ################################################################################
 Profiles:
 
-    TwoOrgsOrdererGenesis:
+    SGOrdererGenesis:
         Orderer:
             <<: *OrdererDefaults
             Organizations:
@@ -23,7 +23,7 @@ Profiles:
             SampleConsortium:
                 Organizations:
                     - *sgorg
-    TwoOrgsChannel:
+    SGChannel:
         Consortium: SampleConsortium
         Application:
             <<: *ApplicationDefaults

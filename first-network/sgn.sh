@@ -133,9 +133,11 @@ function networkDown () {
     clearContainers
     #Cleanup images
     removeUnwantedImages
-    # remove orderer block and other channel configuration transactions and certs
-    rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config
-    # remove the docker-compose yaml file that was customized to the example
+    
+    # do not remove orderer block and other channel configuration transactions and certs
+    # rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config
+    
+    # remove the docker-compose yaml file that was customized to the project
     rm -f docker-compose-e2e.yaml
   fi
 }
@@ -258,7 +260,7 @@ function generateChannelArtifacts() {
   echo "##########################################################"
   # Note: For some unknown reason (at least for now) the block file can't be
   # named orderer.genesis.block or the orderer will fail to launch!
-  configtxgen -profile TwoOrgsOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
+  configtxgen -profile SGOrdererGenesis -outputBlock ./channel-artifacts/genesis.block
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate orderer genesis block..."
     exit 1
@@ -267,7 +269,7 @@ function generateChannelArtifacts() {
   echo "#################################################################"
   echo "### Generating channel configuration transaction 'channel.tx' ###"
   echo "#################################################################"
-  configtxgen -profile TwoOrgsChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
+  configtxgen -profile SGChannel -outputCreateChannelTx ./channel-artifacts/channel.tx -channelID $CHANNEL_NAME
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate channel configuration transaction..."
     exit 1
@@ -277,7 +279,7 @@ function generateChannelArtifacts() {
   echo "#################################################################"
   echo "#######    Generating anchor peer update for SGOrgMSP   ##########"
   echo "#################################################################"
-  configtxgen -profile TwoOrgsChannel -outputAnchorPeersUpdate ./channel-artifacts/SGOrgMSPanchors.tx -channelID $CHANNEL_NAME -asOrg SGOrgMSP
+  configtxgen -profile SGChannel -outputAnchorPeersUpdate ./channel-artifacts/SGOrgMSPanchors.tx -channelID $CHANNEL_NAME -asOrg SGOrgMSP
   if [ "$?" -ne 0 ]; then
     echo "Failed to generate anchor peer update for SGOrgMSP..."
     exit 1

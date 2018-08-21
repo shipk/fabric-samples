@@ -13,6 +13,8 @@ CHANNEL_NAME="$1"
 DELAY="$2"
 : ${CHANNEL_NAME:="sgchannel"}
 : ${TIMEOUT:="60"}
+: ${DELAY:="3"}
+echo DELAY=$DELAY
 COUNTER=1
 MAX_RETRY=5
 ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/sg.com/orderers/orderer.sg.com/msp/tlscacerts/tlsca.sg.com-cert.pem
@@ -67,6 +69,7 @@ createChannel() {
 	cat log.txt
 	verifyResult $res "Channel creation failed"
 	echo "===================== Channel \"$CHANNEL_NAME\" is created successfully ===================== "
+	sleep $DELAY
 	echo
 }
 
@@ -121,6 +124,7 @@ installChaincode () {
 	cat log.txt
         verifyResult $res "Chaincode installation on remote peer PEER$PEER has Failed"
 	echo "===================== Chaincode is installed on remote peer PEER$PEER ===================== "
+	sleep $DELAY
 	echo
 }
 
@@ -138,6 +142,7 @@ instantiateChaincode () {
 	cat log.txt
 	verifyResult $res "Chaincode instantiation on PEER$PEER on channel '$CHANNEL_NAME' failed"
 	echo "===================== Chaincode Instantiation on PEER$PEER on channel '$CHANNEL_NAME' is successful ===================== "
+	sleep $DELAY
 	echo
 }
 
