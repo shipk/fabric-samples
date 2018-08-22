@@ -319,7 +319,8 @@ COMPOSE_FILE_COUCH=docker-compose-couch.yaml
 #
 COMPOSE_FILE_CAS=docker-compose-cas.yaml
 # use golang as the default language for chaincode
-LANGUAGE=golang
+#LANGUAGE=golang
+LANGUAGE=node
 # Parse commandline args
 while getopts "h?m:c:t:d:f:s:l:a?" opt; do
   case "$opt" in

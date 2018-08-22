@@ -1,7 +1,49 @@
 {
-    "name": "sg-network",
+    "name": "sgnetwork",
     "x-type": "hlfv1",
     "version": "1.0.0",
+    "channels": {
+        "sgchannel": {
+            "orderers": [
+                "orderer.sg.com"
+            ],
+            "peers": {
+                "peer0.sgorg.sg.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                },
+                "peer1.sgorg.sg.com": {
+                    "endorsingPeer": true,
+                    "chaincodeQuery": true,
+                    "eventSource": true
+                }
+            }
+        }
+    },
+    "organizations": {
+        "SGOrg": {
+            "mspid": "SGOrgMSP",
+            "peers": [
+                "peer0.sgorg.sg.com",
+                "peer1.sgorg.sg.com"
+            ],
+            "certificateAuthorities": [
+                "ca.sgorg.sg.com"
+            ]
+        }
+    },
+    "orderers": {
+        "orderer.sg.com": {
+            "url": "grpcs://localhost:7050",
+            "grpcOptions": {
+                "ssl-target-name-override": "orderer.sg.com"
+            },
+            "tlsCACerts": {
+                "pem": "INSERT_ORDERER_CA_CERT"
+            }
+        }
+    },
     "peers": {
         "peer0.sgorg.sg.com": {
             "url": "grpcs://localhost:7051",
@@ -22,56 +64,14 @@
             "tlsCACerts": {
                 "pem": "INSERT_SGORG_CA_CERT"
             }
-        },
+        }
     },
     "certificateAuthorities": {
-        "ca.sgorg.example.com": {
+        "ca.sgorg.sg.com": {
             "url": "https://localhost:7054",
             "caName": "ca-sgorg",
             "httpOptions": {
                 "verify": false
-            }
-        }
-    },
-    "orderers": {
-        "orderer.sg.com": {
-            "url": "grpcs://localhost:7050",
-            "grpcOptions": {
-                "ssl-target-name-override": "orderer.sg.com"
-            },
-            "tlsCACerts": {
-                "pem": "INSERT_ORDERER_CA_CERT"
-            }
-        }
-    },
-    "organizations": {
-        "SGOrg": {
-            "mspid": "SGOrgMSP",
-            "peers": [
-                "peer0.sgorg.sg.com",
-                "peer1.sgorg.sg.com"
-            ],
-            "certificateAuthorities": [
-                "ca.sgorg.sg.com"
-            ]
-        }
-    },
-    "channels": {
-        "sgchannel": {
-            "orderers": [
-                "orderer.sg.com"
-            ],
-            "peers": {
-                "peer0.sgorg.sg.com": {
-                    "endorsingPeer": true,
-                    "chaincodeQuery": true,
-                    "eventSource": true
-                },
-                "peer1.sgorg.sg.com": {
-                    "endorsingPeer": true,
-                    "chaincodeQuery": true,
-                    "eventSource": true
-                }
             }
         }
     },
