@@ -210,6 +210,10 @@ updateAnchorPeers 0
 echo "Installing chaincode on sgorg/peer0..."
 installChaincode 0
 
+## Install chaincode on Peer1/SGOrg
+echo "Installing chaincode on sgorg/peer1..."
+installChaincode 1
+
 #Instantiate chaincode on Peer0/SGOrg
 echo "Instantiating chaincode on SGOrg/peer0..."
 instantiateChaincode 0
@@ -218,9 +222,21 @@ instantiateChaincode 0
 echo "Querying chaincode on sgorg/peer0..."
 chaincodeQuery 0 100
 
+#Query on chaincode on Peer1/SGOrg
+echo "Querying chaincode on sgorg/peer1..."
+chaincodeQuery 1 100
+
 #Invoke on chaincode on Peer0/SGOrg
 echo "Sending invoke transaction on sgorg/peer0..."
 chaincodeInvoke 0
+
+#Query on chaincode on Peer0/SGOrg
+echo "Querying chaincode on sgorg/peer0..."
+chaincodeQuery 0 90
+
+#Query on chaincode on Peer1/SGOrg
+echo "Querying chaincode on sgorg/peer1..."
+chaincodeQuery 1 90
 
 echo
 echo "========= All GOOD, SGN execution completed =========== "
