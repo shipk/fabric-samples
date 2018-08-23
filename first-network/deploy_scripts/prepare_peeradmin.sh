@@ -40,7 +40,7 @@ composer card delete -c PeerAdmin@sgnetwork
 composer card import -f PeerAdmin@sgnetwork.card --card PeerAdmin@sgnetwork
 
 # install business network
-composer network install --card PeerAdmin@sgnetwork --archiveFile ../bna/splitgrid-network-0.0.2-deploy.38.bna
+composer network install --card PeerAdmin@sgnetwork --archiveFile ./bna/splitgrid-network-0.0.2-deploy.38.bna
 
 rm -r alice 
 
@@ -57,5 +57,12 @@ composer network start \
   --networkName splitgrid-network \
   --networkVersion 0.0.2-deploy.38 \
   --option endorsementPolicyFile=endorsement-policy.json \
+  --networkAdmin alice \
+  --networkAdminEnrollSecret alice/admin-pub.pem
+
+composer network start \
+  --card PeerAdmin@sgnetwork \
+  --networkName splitgrid-network \
+  --networkVersion 0.0.2-deploy.38 \
   --networkAdmin alice \
   --networkAdminEnrollSecret alice/admin-pub.pem
