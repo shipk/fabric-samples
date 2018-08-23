@@ -60,9 +60,15 @@ composer network start \
   --networkAdmin alice \
   --networkAdminEnrollSecret alice/admin-pub.pem
 
-composer network start \
-  --card PeerAdmin@sgnetwork \
-  --networkName splitgrid-network \
-  --networkVersion 0.0.2-deploy.38 \
-  --networkAdmin alice \
-  --networkAdminEnrollSecret alice/admin-pub.pem
+composer card delete -c alice@splitgrid-network
+
+composer card create \
+  -p connection_sg.json \
+  -u alice \
+  -n splitgrid-network \
+  -c alice/admin-pub.pem \
+  -k alice/admin-priv.pem
+
+composer card import -f alice@splitgrid-network.card
+
+composer network ping -c alice@splitgrid-network

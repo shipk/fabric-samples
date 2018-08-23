@@ -198,48 +198,53 @@ chaincodeInvoke () {
 	echo
 }
 
-## Create channel
-echo "Creating channel..."
-createChannel
+testNet () {
+	## Create channel
+	echo "Creating channel..."
+	createChannel
 
-## Join all the peers to the channel
-echo "Having all peers join the channel..."
-joinChannel
+	## Join all the peers to the channel
+	echo "Having all peers join the channel..."
+	joinChannel
 
-## Set the anchor peers for each org in the channel
-echo "Updating anchor peers for sgorg..."
-updateAnchorPeers 0
+	## Set the anchor peers for each org in the channel
+	echo "Updating anchor peers for sgorg..."
+	updateAnchorPeers 0
 
-## Install chaincode on Peer0/SGOrg
-echo "Installing chaincode on sgorg/peer0..."
-installChaincode 0
-## Install chaincode on Peer1/SGOrg
-echo "Installing chaincode on sgorg/peer1..."
-installChaincode 1
+	## Install chaincode on Peer0/SGOrg
+	echo "Installing chaincode on sgorg/peer0..."
+	installChaincode 0
+	## Install chaincode on Peer1/SGOrg
+	echo "Installing chaincode on sgorg/peer1..."
+	installChaincode 1
 
-#Instantiate chaincode on Peer0/SGOrg
-echo "Instantiating chaincode on SGOrg/peer0..."
-instantiateChaincode 0
+	#Instantiate chaincode on Peer0/SGOrg
+	echo "Instantiating chaincode on SGOrg/peer0..."
+	instantiateChaincode 0
 
-#Query on chaincode on Peer0/SGOrg
-echo "Querying chaincode on sgorg/peer0..."
-chaincodeQuery 0 100
+	#Query on chaincode on Peer0/SGOrg
+	echo "Querying chaincode on sgorg/peer0..."
+	chaincodeQuery 0 100
 
-#Query on chaincode on Peer1/SGOrg
-echo "Querying chaincode on sgorg/peer1..."
-chaincodeQuery 1 100
+	#Query on chaincode on Peer1/SGOrg
+	echo "Querying chaincode on sgorg/peer1..."
+	chaincodeQuery 1 100
 
-#Invoke on chaincode on Peer0/SGOrg
-echo "Sending invoke transaction on sgorg/peer0..."
-chaincodeInvoke 0
+	#Invoke on chaincode on Peer0/SGOrg
+	echo "Sending invoke transaction on sgorg/peer0..."
+	chaincodeInvoke 0
 
-#Query on chaincode on Peer0/SGOrg
-echo "Querying chaincode on sgorg/peer0..."
-chaincodeQuery 0 90
+	#Query on chaincode on Peer0/SGOrg
+	echo "Querying chaincode on sgorg/peer0..."
+	chaincodeQuery 0 90
 
-#Query on chaincode on Peer1/SGOrg
-echo "Querying chaincode on sgorg/peer1..."
-chaincodeQuery 1 90
+	#Query on chaincode on Peer1/SGOrg
+	echo "Querying chaincode on sgorg/peer1..."
+	chaincodeQuery 1 90
+}
+
+# Test the ledger
+#testNet
 
 echo
 echo "========= All GOOD, SGN execution completed =========== "
