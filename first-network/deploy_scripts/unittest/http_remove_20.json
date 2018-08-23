@@ -1,0 +1,6 @@
+{
+   "$class": "splitgrid.network.removeContract",
+   "contract": "id_20", 
+   "change_username": "usr1"
+}
+

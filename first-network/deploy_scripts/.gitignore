@@ -1,3 +1,5 @@
 *.card
-*.pem
+*pem
 *_sk
+connection_sg.json
+tmp/

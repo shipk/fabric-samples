@@ -1,0 +1,1 @@
+curl -X GET --header 'Content-Type: application/json' --header 'Accept: application/json' 'http://localhost:3000/api/Contract/id_20'
