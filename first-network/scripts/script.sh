@@ -244,7 +244,7 @@ testNet () {
 }
 
 # Test the ledger
-#testNet
+testNet
 
 echo
 echo "========= All GOOD, SGN execution completed =========== "

@@ -45,12 +45,14 @@ composer network install --card PeerAdmin@sgnetwork --archiveFile ./bna/splitgri
 rm -r alice 
 
 # Retrieving business network administrator certificates for SGOrg
-composer identity request \
+# admin/cuzdc65Q - user configured in CA (see docker-compose-cas-template.yaml)
+  composer identity request \
   --card PeerAdmin@sgnetwork \
   --user admin \
   --enrollSecret cuzdc65Q \
   --path alice
 
+skip () {
 # start network
 composer network start \
   --card PeerAdmin@sgnetwork \
@@ -65,10 +67,23 @@ composer card delete -c alice@splitgrid-network
 composer card create \
   -p connection_sg.json \
   -u alice \
-  -n splitgrid-network \
+  -n sgnetwork \
   -c alice/admin-pub.pem \
   -k alice/admin-priv.pem
 
 composer card import -f alice@splitgrid-network.card
 
 composer network ping -c alice@splitgrid-network
+}
+
+composer network start \
+  --card PeerAdmin@sgnetwork \
+  --networkName splitgrid-network \
+  --networkVersion 0.0.2-deploy.38 \
+  --networkAdmin admin \
+  --networkAdminEnrollSecret cuzdc65Q
+
+composer card delete -c admin@splitgrid-network
+composer card import -f admin@splitgrid-network.card
+
+composer network ping -c admin@splitgrid-network
