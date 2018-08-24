@@ -245,6 +245,7 @@ testNet () {
 
 # Test the ledger
 testNet
+#chaincodeQuery 0 90
 
 echo
 echo "========= All GOOD, SGN execution completed =========== "

@@ -41,7 +41,7 @@ composer card delete -c PeerAdmin@sgnetwork
 composer card import -f ./tmp/PeerAdmin@sgnetwork.card 
 
 # install business network
-composer network install --card PeerAdmin@sgnetwork --archiveFile ./bna/splitgrid-network-0.0.2-deploy.38.bna
+composer network install --card PeerAdmin@sgnetwork --archiveFile ./bna/splitgrid-network-0.0.2-deploy.40.bna
 
 
 # Retrieving business network administrator certificates for SGOrg
@@ -57,7 +57,7 @@ skip () {
 composer network start \
   --card PeerAdmin@sgnetwork \
   --networkName splitgrid-network \
-  --networkVersion 0.0.2-deploy.38 \
+  --networkVersion 0.0.2-deploy.40 \
   --option endorsementPolicyFile=endorsement-policy.json \
   --networkAdmin alice \
   --networkAdminEnrollSecret alice/admin-pub.pem
@@ -79,7 +79,7 @@ composer network ping -c alice@splitgrid-network
 composer network start \
   --card PeerAdmin@sgnetwork \
   --networkName splitgrid-network \
-  --networkVersion 0.0.2-deploy.38 \
+  --networkVersion 0.0.2-deploy.40 \
   --networkAdmin admin \
   --networkAdminEnrollSecret cuzdc65Q
 # --option endorsementPolicyFile=endorsement-policy.json \

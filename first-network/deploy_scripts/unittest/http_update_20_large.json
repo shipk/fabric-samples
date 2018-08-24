@@ -1,6 +1,6 @@
 {
    "$class": "splitgrid.network.updateContract",
-   "Contract": "id_20", 
+   "contract": "id_20", 
    "customerid": "14",
    "brand_ownerid": "7",
    "brand_owner_commission": "49",

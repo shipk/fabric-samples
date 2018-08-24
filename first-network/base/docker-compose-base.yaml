@@ -45,6 +45,7 @@ services:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/sgorg.sg.com/peers/peer0.sgorg.sg.com/msp:/etc/hyperledger/fabric/msp
         - ../crypto-config/peerOrganizations/sgorg.sg.com/peers/peer0.sgorg.sg.com/tls:/etc/hyperledger/fabric/tls
+#        - /var/hyperledger/peer0:/var/hyperledger/production
     ports:
       - 7051:7051
       - 7053:7053
@@ -64,6 +65,7 @@ services:
         - /var/run/:/host/var/run/
         - ../crypto-config/peerOrganizations/sgorg.sg.com/peers/peer1.sgorg.sg.com/msp:/etc/hyperledger/fabric/msp
         - ../crypto-config/peerOrganizations/sgorg.sg.com/peers/peer1.sgorg.sg.com/tls:/etc/hyperledger/fabric/tls
+#        - /var/hyperledger/peer1:/var/hyperledger/production
 
     ports:
       - 8051:7051
